@@ -151,6 +151,4 @@ int main_template(int argc, const char **argv) {
     return 0;
 }
 
-int main(int argc,const char** argv){
-    return main_template<VecX<DIM>>(argc, argv);
-}
+#include "../Tools/dimensionsInstantiation.hpp"

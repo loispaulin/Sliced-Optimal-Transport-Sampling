@@ -1,7 +1,5 @@
 # Sliced-Optimal-Transport-Sampling
 
-**Readme**
-
 Dependancies:
 =============
  + GSL
@@ -11,8 +9,11 @@ Code compilation:
 =================
 
 mkdir build
+
 cd build
+
 cmake .. -DCMAKE_BUILD_TYPE=Release
+
 make sot
 
 

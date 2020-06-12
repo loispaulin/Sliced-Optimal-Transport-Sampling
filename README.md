@@ -17,6 +17,6 @@ Code compilation:
 Code toy execution:
 ===================
 
-./sot -n 1024 -c -o test.dat
+    ./sot -n 1024 -d 2 -c -o test.dat
 
 Generates 1 set of 1024 samples in test.dat using default parameters

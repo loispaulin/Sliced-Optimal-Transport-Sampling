@@ -8,13 +8,10 @@ Dependancies:
 Code compilation:
 =================
 
-mkdir build
-
-cd build
-
-cmake .. -DCMAKE_BUILD_TYPE=Release
-
-make sot
+    mkdir build
+    cd build
+    cmake .. -DCMAKE_BUILD_TYPE=Release
+    make sot
 
 
 Code toy execution:

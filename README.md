@@ -3,7 +3,7 @@
 Dependancies:
 =============
  + GSL
- + OpenMP
+ + OpenMP (`brew install libomp` on macOS)
 
 Code compilation:
 =================
@@ -19,4 +19,4 @@ Code toy execution:
 
     ./sot -n 1024 -d 2 -c -o test.dat
 
-Generates 1 set of 1024 samples in test.dat using default parameters
+Generates 1 set of 1024 samples in dimension 2, stored in test.dat using default parameters

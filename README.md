@@ -3,6 +3,8 @@
 Source code of the sampler proposed in [Sliced Optimal Transport Sampling](https://perso.liris.cnrs.fr/lpaulin/Publications/paulin2020.html), Loïs Paulin, Nicolas Bonneel, David Coeurjolly, Jean-Claude Iehl, Antoine Webanck, Mathieu Desbrun, Victor Ostromoukhov, ACM Trans. on Graphics, SIGGRAPH 2020.
 
 
+[![linux/macOS/windows CI](https://github.com/loispaulin/Sliced-Optimal-Transport-Sampling/actions/workflows/c-cpp.yml/badge.svg)](https://github.com/loispaulin/Sliced-Optimal-Transport-Sampling/actions/workflows/c-cpp.yml)
+
 Dependancies:
 =============
  + GSL

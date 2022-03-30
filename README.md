@@ -1,6 +1,7 @@
 # Sliced-Optimal-Transport-Sampling
 
-Source code of the sampler proposed in "Sliced Optimal Transport Sampling", Loïs Paulin, Nicolas Bonneel, David Coeurjolly, Jean-Claude Iehl, Antoine Webanck, Mathieu Desbrun, Victor Ostromoukhov, ACM Trans. on Graphics, SIGGRAPH 2020.
+Source code of the sampler proposed in [Sliced Optimal Transport Sampling](https://perso.liris.cnrs.fr/lpaulin/Publications/paulin2020.html), Loïs Paulin, Nicolas Bonneel, David Coeurjolly, Jean-Claude Iehl, Antoine Webanck, Mathieu Desbrun, Victor Ostromoukhov, ACM Trans. on Graphics, SIGGRAPH 2020.
+
 
 Dependancies:
 =============

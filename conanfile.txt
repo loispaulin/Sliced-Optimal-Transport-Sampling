@@ -1,5 +1,0 @@
-[requires]
-gsl/2.7
-
-[generators]
-cmake

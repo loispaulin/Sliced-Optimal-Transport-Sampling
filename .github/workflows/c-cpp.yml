@@ -24,15 +24,13 @@ jobs:
         os: [ubuntu-latest, macOS-latest, windows-latest]
 
     steps:
+
     - uses: actions/checkout@v2
     - name: Get Conan
       uses: turtlebrowser/get-conan@v1.0
 
     - name: Create default profile
       run: conan profile new default --detect
-
- #   - name: Update profile
- #     run: conan profile update general.sysrequires_mode=enabled default
 
     - name: linux
       if: matrix.os == 'ubuntu-latest'

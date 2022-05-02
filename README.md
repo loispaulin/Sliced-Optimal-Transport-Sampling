@@ -33,7 +33,7 @@ Code compilation:
     make sot
 
 
-Code toy execution:
+Code execution:
 ===================
 
     ./sot -n 1024 -d 2 -c -o test.dat

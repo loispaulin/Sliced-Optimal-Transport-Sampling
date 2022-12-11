@@ -17,8 +17,12 @@ ADD_LIBRARY(SOURCES
         Tools/mapping.cpp
         Tools/my_utility.cpp
         Math/myMath.cpp
+        Tools/iopointset.cpp
         )
 target_link_libraries(SOURCES GSL::gsl)
 
 add_executable(sot Mains/slicedOptimNDBall.cpp)
 target_link_libraries(sot SOURCES OpenMP::OpenMP_CXX)
+
+add_executable(projsot Mains/slicedOptimMultiProj.cpp)
+target_link_libraries(projsot SOURCES OpenMP::OpenMP_CXX)

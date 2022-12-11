@@ -129,3 +129,153 @@ double solveForGamma(int dim){
 
     return 0.5 * (maxi + mini);
 }
+
+VecXDynamic NBall2NCube(const VecXDynamic& p);
+/**
+ * Maps the N-Ball into a N-Cylinder
+ * @param p
+ * @return
+ */
+VecXDynamic NBall2NCylinder(const VecXDynamic& p){
+    if (p.norm() < std::pow(10, -16)){
+        return p;
+    }
+    if (p.dim() == 1){
+        return p;
+    }
+
+    //Split (x, y) = p with x the dim-1 coordinates
+    VecXDynamic x(p.dim()-1);
+    double y = p[p.dim()-1];
+    for (int i = 0; i < p.dim() - 1; ++i){
+        x[i] = p[i];
+    }
+
+    double signy = 1.;
+
+    if (y < 0){
+        signy = -1;
+        y = -y;
+    }
+
+    VecXDynamic ret(p.dim());
+    double g, h;
+
+    if (y >= my_gamma(p.dim()) * x.norm()){
+        //top
+        g = gtop(x, y) / tau(p.dim());
+        h = htop(x, y);
+    } else {
+        //bot
+        g = gbot(x, y);
+        h = hbot(x, y) / rho(p.dim());
+    }
+    for (int i = 0; i < p.dim() - 1; ++i){
+        ret[i] = x[i] * g;
+    }
+    ret[ret.dim() - 1] = signy * h;
+
+    return ret;
+
+}
+
+/**
+ * Maps the N-Cylinder into the N-Cube by mapping the projection along the last dimention to the (N-1)-Cube
+ * @param p
+ * @return
+ */
+VecXDynamic NCylinder2NCube(const VecXDynamic& p) {
+    if (p.norm() < std::pow(10, -16)){
+        return p;
+    }
+    if (p.dim() == 1){
+        return p;
+    }
+    if (p.dim() == 2){
+        return p;
+    }
+    VecXDynamic ret(p.dim());
+    VecXDynamic x(p.dim() - 1);
+    for (int i = 0; i < x.dim(); ++i){
+        x[i] = p[i];
+    }
+    VecXDynamic newX = NBall2NCube(x);
+    for (int i = 0; i < newX.dim(); ++i){
+        ret[i] = newX[i];
+    }
+    ret[ret.dim()-1] = p[p.dim() - 1];
+    return ret;
+}
+
+/**
+ * Maps the N-Ball into the N-Cube
+ * @param p
+ * @return
+ */
+VecXDynamic NBall2NCube(const VecXDynamic& p) {
+    return NCylinder2NCube(NBall2NCylinder(p));
+}
+
+VecXDynamic NCylinder2NBall(const VecXDynamic& p){
+    int d = p.dim();
+
+    if (d == 1){
+        return p;
+    }
+
+    double y = p[d-1];
+    double signy = (y < 0. ? -1. : 1.);
+    y = std::abs(y);
+    double normx = std::sqrt(p.norm2() - y*y);
+
+    if (normx < pow(10, -7) ){
+        return p;
+    }
+
+    VecXDynamic res(d);
+    if (y > normx){
+        double xScale = y / normx;
+        double invTau = inverseTau(tau(d) / xScale, d);
+        double divider = std::sqrt(1. + invTau * invTau);
+
+        for (int i = 0; i < d - 1; ++i){
+            res[i] = p[i] * xScale / divider;
+        }
+        res[d-1] = signy * y * invTau / divider;
+    } else {
+        double invRho = inverseRho(rho(d) * y / normx, d);
+        double divider = std::sqrt(1. + invRho * invRho);
+
+        for (int i = 0; i < d - 1; ++i){
+            res[i] = p[i] / divider;
+        }
+        res[d-1] = signy * normx * invRho / divider;
+    }
+
+    return res;
+}
+
+VecXDynamic NCube2NBall(const VecXDynamic& p);
+VecXDynamic NCube2NCylinder(const VecXDynamic& p){
+    if (p.dim() <= 2){
+        return p;
+    }
+    VecXDynamic x(p.dim() - 1);
+    for (int i = 0; i < x.dim(); ++i){
+        x[i] = p[i];
+    }
+    x = NCube2NBall(x);
+    VecXDynamic ret(p.dim());
+    for (int i = 0; i < x.dim(); ++i){
+        ret[i] = x[i];
+    }
+    ret[p.dim() - 1] = p[p.dim() - 1];
+    return ret;
+}
+
+VecXDynamic NCube2NBall(const VecXDynamic& p){
+    if (p.dim() == 1){
+        return p;
+    }
+    return NCylinder2NBall(NCube2NCylinder(p));
+}

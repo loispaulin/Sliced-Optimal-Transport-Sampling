@@ -20,27 +20,6 @@ double drho(double lambda, int dim);
 double inverseRho(double lambda, int dim);
 double solveForGamma(int dim);
 
-/*
-template<typename VecType >
-inline double gtopgsl(const VecType& x, double y) {
-    int d = int(x.dim());
-    double y2 = y * y;
-    double x2 = x.norm2();
-    double y2_x2 = y2 / x2;
-    double sqrt1 = std::sqrt(1 + y2_x2);
-
-    double leftSub = (std::sqrt(M_PI) * tgamma(0.5* d)) / (2. * tgamma((1 + d) * 0.5));
-    double h2F1;
-    if (d == 2){
-        h2F1 = 1;
-    } else {
-        h2F1 = gsl_sf_hyperg_2F1(0.5, 1. - 0.5 * d, 1.5, y2 / (x2 + y2));
-    }
-    double rightSub = (y * h2F1) / (x.norm() * sqrt1);
-
-    return sqrt1 * std::pow(d * (leftSub - rightSub), 1. / d);
-}
- */
 template<typename VecType>
 inline double gtop(const VecType& x, double y) {
     double x1 = x.norm();
@@ -252,5 +231,13 @@ template <int N>
 inline VecX<N> NCube2NBall(const VecX<N>& p){
     return NCylinder2NBall(NCube2NCylinder(p));
 }
+
+
+VecXDynamic NBall2NCube(const VecXDynamic& p);
+VecXDynamic NBall2NCylinder(const VecXDynamic& p);
+VecXDynamic NCylinder2NCube(const VecXDynamic& p);
+VecXDynamic NCube2NBall(const VecXDynamic& p);
+VecXDynamic NCylinder2NBall(const VecXDynamic& p);
+VecXDynamic NCube2NCylinder(const VecXDynamic& p);
 
 #endif //SLICEDOPTIM_MAPPING_H

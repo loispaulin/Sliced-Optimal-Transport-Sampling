@@ -9,6 +9,8 @@
 #include <vector>
 #include "../Math/VecX.h"
 
+bool read_points_from_file(std::istream& in, std::vector<double>& points);
+
 template <class VECTYPE>
 inline void savePointsetND(std::ostream& out, const std::vector<VECTYPE>& points){
     out.precision(11);
